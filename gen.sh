@@ -26,7 +26,7 @@ for ((i = 0; i < COUNT; i++)); do
   echo "    && git -C repo fetch --depth 1 origin \"$sha\" \\"
   echo "    && git -C repo checkout FETCH_HEAD"
   echo ""
-  echo "RUN --mount=type=cache,id=nuget,target=/root/.nuget/packages,sharing=locked \\"
+  echo "RUN --mount=type=cache,id=nuget,target=/root/.nuget \\"
   echo "    dotnet build \"repo/$repo_sln_rel\" -p:NuGetAudit=false"
 
   solution_args+=("repos/$repo_name/$repo_sln_rel")
@@ -42,7 +42,7 @@ echo "    && git -C sourcebrowser remote add origin \"https://github.com/Alxandr
 echo "    && git -C sourcebrowser fetch --depth 1 origin \"$sourcebrowser_sha\" \\"
 echo "    && git -C sourcebrowser checkout FETCH_HEAD"
 echo ""
-echo "RUN --mount=type=cache,id=nuget,target=/root/.nuget/packages,sharing=locked \\"
+echo "RUN --mount=type=cache,id=nuget,target=/root/.nuget \\"
 echo "    dotnet build \"sourcebrowser/SourceBrowser.slnx\" -c Release -p:DontPack=true"
 
 echo ""
@@ -51,7 +51,7 @@ for instruction in "${copy_instructions[@]}"; do
   echo "$instruction"
 done
 echo ""
-echo "RUN --mount=type=cache,id=nuget,target=/root/.nuget/packages,sharing=locked \\"
+echo "RUN --mount=type=cache,id=nuget,target=/root/.nuget \\"
 echo -n "    \"sourcebrowser/src/HtmlGenerator/bin/Release/net10.0/HtmlGenerator\" \"/out:out\""
 for solution in "${solution_args[@]}"; do
   echo " \\"

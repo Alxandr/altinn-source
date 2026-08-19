@@ -3,6 +3,10 @@ WORKDIR /app
 
 RUN apk add --no-cache git
 
+ENV NUGET_PACKAGES=/root/.nuget/packages \
+    NUGET_HTTP_CACHE_PATH=/root/.nuget/http-cache \
+    NUGET_SCRATCH=/root/.nuget/scratch
+
 FROM mcr.microsoft.com/dotnet/aspnet:10.0-alpine@sha256:c4b29bf368004ad9076c1ab9bc91fb373561e3905b4345637e14e8b8c57e3be8 AS runtime
 EXPOSE 8080
 WORKDIR /app
