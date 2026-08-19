@@ -1,0 +1,16 @@
+repos:
+  - repo: https://github.com/Altinn/altinn-authorization-utils.git
+    name: altinn-authorization-utils
+    sln: Altinn.Authorization.Utils.slnx
+  - repo: https://github.com/Altinn/altinn-register.git
+    name: altinn-register
+    sln: Altinn.Register.sln
+  - repo: https://github.com/Altinn/altinn-authorization-tmp.git
+    name: altinn-authorization-tmp
+    sln: Altinn.Authorization.sln
+  - repo: https://github.com/Altinn/altinn-authentication.git
+    name: altinn-authentication
+    sln: Altinn.Platform.Authentication.sln
+  - repo: https://github.com/Altinn/altinn-auth-audit-log.git
+    name: altinn-auth-audit-log
+    sln: Altinn.Auth.AuditLog.sln
