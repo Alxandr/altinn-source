@@ -5,7 +5,7 @@ eval "$(yq -o=shell repos.yaml)"
 
 cat tpl.Dockerfile
 
-copy_instructions=()
+mount_instructions=()
 solution_args=()
 repo_args=()
 for ((i = 0; i < COUNT; i++)); do
@@ -31,7 +31,9 @@ for ((i = 0; i < COUNT; i++)); do
 
   solution_args+=("repos/$repo_name/$repo_sln_rel")
   repo_args+=("/repo:repos/$repo_name=$repo_name=$repo")
-  copy_instructions+=("COPY --from=$repo_name \"/app/repo\" \"./repos/$repo_name\"")
+  # HtmlGenerator runs MSBuild design-time builds that update files under obj.
+  # BuildKit discards writes to these bind mounts after the RUN completes.
+  mount_instructions+=("--mount=type=bind,from=$repo_name,source=/app/repo,target=/app/repos/$repo_name,rw")
 done
 
 sourcebrowser_sha="$(git ls-remote "https://github.com/Alxandr/SourceBrowser.git" HEAD | cut -f1)"
@@ -47,11 +49,11 @@ echo "    dotnet build \"sourcebrowser/SourceBrowser.slnx\" -c Release -p:DontPa
 
 echo ""
 echo "FROM sourcebrowser AS index-builder"
-for instruction in "${copy_instructions[@]}"; do
-  echo "$instruction"
-done
 echo ""
 echo "RUN --mount=type=cache,id=nuget,target=/root/.nuget \\"
+for instruction in "${mount_instructions[@]}"; do
+  echo "    $instruction \\"
+done
 echo -n "    \"sourcebrowser/src/HtmlGenerator/bin/Release/net10.0/HtmlGenerator\" \"/out:out\""
 for solution in "${solution_args[@]}"; do
   echo " \\"
