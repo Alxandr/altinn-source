@@ -54,7 +54,7 @@ echo "RUN --mount=type=cache,id=nuget,target=/root/.nuget \\"
 for instruction in "${mount_instructions[@]}"; do
   echo "    $instruction \\"
 done
-echo -n "    \"sourcebrowser/src/HtmlGenerator/bin/Release/net10.0/HtmlGenerator\" \"/out:out\""
+echo -n "    \"sourcebrowser/src/HtmlGenerator/bin/Release/net10.0/HtmlGenerator\" \"/out:out\" /noWarnings"
 for solution in "${solution_args[@]}"; do
   echo " \\"
   echo -n "    \"$solution\""
