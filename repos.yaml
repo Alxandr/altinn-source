@@ -7,7 +7,7 @@ repos:
     sln: Altinn.Register.sln
   - repo: https://github.com/Altinn/altinn-auth.git
     name: altinn-auth
-    sln: Altinn.Authorization.sln
+    sln: Altinn.Authorization.slnx
   - repo: https://github.com/Altinn/altinn-authentication.git
     name: altinn-authentication
     sln: Altinn.Platform.Authentication.sln
