@@ -27,7 +27,7 @@ for ((i = 0; i < COUNT; i++)); do
   echo "    && git -C repo checkout FETCH_HEAD"
   echo ""
   echo "RUN --mount=type=cache,id=nuget,target=/root/.nuget \\"
-  echo "    dotnet build \"repo/$repo_sln_rel\" -p:NuGetAudit=false"
+  echo "    cd repo && dotnet build \"$repo_sln_rel\" -p:NuGetAudit=false"
 
   solution_args+=("repos/$repo_name/$repo_sln_rel")
   repo_args+=("/repo:repos/$repo_name=$repo_name=$repo")
