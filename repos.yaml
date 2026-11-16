@@ -10,7 +10,7 @@ repos:
     sln: Altinn.Authorization.slnx
   - repo: https://github.com/Altinn/altinn-authentication.git
     name: altinn-authentication
-    sln: Altinn.Platform.Authentication.sln
+    sln: Altinn.Authentication.slnx
   - repo: https://github.com/Altinn/altinn-auth-audit-log.git
     name: altinn-auth-audit-log
     sln: Altinn.Auth.AuditLog.sln
